@@ -1,4 +1,4 @@
-# Hexware Assignment - FastAPI Clean Architecture Projects
+# Hexware Assignment
 
 This repository contains two FastAPI projects built following Clean Architecture principles.
 
