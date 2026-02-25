@@ -23,9 +23,12 @@ wheels/
 .installed.cfg
 *.egg
 
+# Environment variables
+.env
+*.env
+
 # Database
 *.db
-*.sqlite
 *.sqlite3
 
 # IDE
@@ -35,10 +38,13 @@ wheels/
 *.swo
 *~
 
+# Alembic
+alembic/versions/*.py
+!alembic/versions/__init__.py
+
+# Logs
+*.log
+
 # OS
 .DS_Store
 Thumbs.db
-
-# Environment
-.env
-.env.local
