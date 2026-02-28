@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+
+  auth-service:
+    build: .
+    container_name: auth-service
+    ports:
+      - "8001:8001"
+    env_file:
+      - .env.docker
+    depends_on:
+      - db
+    networks:
+      - auth-network
+
+  db:
+    image: postgres:15
+    container_name: auth-postgres
+    environment:
+      POSTGRES_USER: sa
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: auth_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - auth-network
+
+volumes:
+  postgres_data:
+
+networks:
+  auth-network:

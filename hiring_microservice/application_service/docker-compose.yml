@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+
+  application-service:
+    build: .
+    container_name: application-service
+    ports:
+      - "8004:8004"
+    env_file:
+      - .env.docker
+    depends_on:
+      - db
+    restart: always
+    networks:
+      - application-network
+
+  db:
+    image: postgres:15
+    container_name: application-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: applicationdb
+    ports:
+      - "5437:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - application-network
+
+volumes:
+  postgres_data:
+
+networks:
+  application-network:

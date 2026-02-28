@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+
+  job-service:
+    build: .
+    container_name: job-service
+    ports:
+      - "8001:8001"
+    env_file:
+      - .env.docker
+    depends_on:
+      - db
+    restart: always
+    networks:
+      - job-network
+
+  db:
+    image: postgres:15
+    container_name: job-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: jobdb
+    ports:
+      - "5436:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - job-network
+
+volumes:
+  postgres_data:
+
+networks:
+  job-network:

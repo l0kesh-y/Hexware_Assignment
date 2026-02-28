@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+
+  user-service:
+    build: .
+    container_name: user-service
+    ports:
+      - "8002:8002"
+    env_file:
+      - .env.docker
+    depends_on:
+      - db
+    restart: always
+    networks:
+      - user-network
+
+  db:
+    image: postgres:15
+    container_name: user-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: userdb
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - user-network
+
+volumes:
+  postgres_data:
+
+networks:
+  user-network:
