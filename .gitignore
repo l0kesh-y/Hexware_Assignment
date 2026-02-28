@@ -55,3 +55,8 @@ htmlcov/
 
 # Alembic
 alembic/versions/*.pyc
+alembic/versions/*.py
+!alembic/versions/__init__.py
+
+# Logs
+*.log
